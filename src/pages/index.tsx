@@ -57,7 +57,7 @@ export default function Home() {
               <Image
                 className={styles.logo}
                 src="https://nextjs.org/icons/vercel.svg"
-                alt="Vercel logomark"
+                alt="Vercel logoMark"
                 width={20}
                 height={20}
               />

@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,6 +36,17 @@ export default function Home() {
             height={38}
             priority
           />
+
+          <h1>Welcome to my blog!</h1>
+          <Link href="/posts/first-post">First Post</Link>
+          
+          <Image
+            src="/images/example.jpg"
+            alt="Example"
+            width={500}
+            height={300}
+          />
+
           <ol>
             <li>
               Get started by editing <code>src/pages/index.tsx</code>.

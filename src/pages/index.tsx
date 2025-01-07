@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
 
@@ -35,6 +36,10 @@ export default function Home() {
             height={38}
             priority
           />
+
+          <h1>Welcome to my blog!</h1>
+          <Link href="/posts/first-post">First Post</Link>
+          
           <ol>
             <li>
               Get started by editing <code>src/pages/index.tsx</code>.
@@ -52,7 +57,7 @@ export default function Home() {
               <Image
                 className={styles.logo}
                 src="https://nextjs.org/icons/vercel.svg"
-                alt="Vercel logomark"
+                alt="Vercel logoMark"
                 width={20}
                 height={20}
               />

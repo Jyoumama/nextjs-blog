@@ -63,10 +63,10 @@ const Home: NextPage<HomeProps> = ({ allPostsData }) => {
 
           <section>
             <h2>Blog Posts</h2>
-            {allPostsData.map(({id, title, date }) => (
-              <div key={id}>
+            {allPostsData.map(({ id, title, date }) => (
+              <div key={id} className="post">
                 <p>
-                  <strong>{title}</strong> - <small>{date}</small>
+                  <span className="post-title">{title}</span> - <span className="post-date">{date}</span>
                 </p>
               </div>
             ))}

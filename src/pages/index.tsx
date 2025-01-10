@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
 import { GetStaticProps, NextPage } from "next";
@@ -98,7 +99,7 @@ const Home: NextPage<HomeProps> = ({ allPostsData }) => {
               <Image
                 className={styles.logo}
                 src="https://nextjs.org/icons/vercel.svg"
-                alt="Vercel logomark"
+                alt="Vercel logoMark"
                 width={20}
                 height={20}
               />

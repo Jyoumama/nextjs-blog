@@ -136,6 +136,15 @@ a.secondary {
   .main ol {
     text-align: center;
   }
+  
+  .post-title {
+    font-weight: bold;
+  }
+  
+  .post-date {
+    font-size: 0.9rem;
+    color: gray;
+  }
 
   .ctas {
     flex-direction: column;

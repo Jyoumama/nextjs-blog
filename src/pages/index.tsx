@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
-import Link from "next/link";
+import { GetStaticProps, NextPage } from "next";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,7 +16,29 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export default function Home() {
+type Post = {
+  id: number;
+  title: string;
+  date: string;
+};
+
+type HomeProps = {
+  allPostsData: Post[];
+};
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  return {
+    props: {
+      allPostsData: [
+        { id: 1, title: "First Post", date: "2024-01-01" },
+        { id: 2, title: "Second Post", date: "2024-01-02" },
+        { id: 3, title: "Third Post", date: "2024-01-03" },
+      ],
+    },
+  };
+};
+
+const Home: NextPage<HomeProps> = ({ allPostsData }) => {
   return (
     <>
       <Head>
@@ -39,6 +61,18 @@ export default function Home() {
           />
 
           <h1>Welcome to my blog!</h1>
+
+          <section>
+            <h2>Blog Posts</h2>
+            {allPostsData.map(({ id, title, date }) => (
+              <div key={id} className="post">
+                <p>
+                  <span className="post-title">{title}</span> - <span className="post-date">{date}</span>
+                </p>
+              </div>
+            ))}
+          </section>
+
           <Link href="/posts/first-post">First Post</Link>
           
           <Image
@@ -128,4 +162,7 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export default Home;
+

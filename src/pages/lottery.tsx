@@ -15,7 +15,7 @@ const fetcher = async (url: string): Promise<LotteryResult> => {
   }
 };
 
-const Lottery: NextPage<{}> = () => {
+const Lottery: NextPage<object> = () => {
   const { data: lottery, error } = useSWR("/api/lottery", fetcher);
 
   if (error) {

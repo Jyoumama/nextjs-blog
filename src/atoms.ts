@@ -1,4 +1,4 @@
-import { atom } from "jotai";
+import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
 export enum Filter {
   All = "All",
@@ -6,11 +6,24 @@ export enum Filter {
   Completed = "Completed",
 }
 
-export const filterAtom = atom<Filter>(Filter.All);
+export const filterAtom = atomWithStorage<Filter>("filter",Filter.All);
 
 export enum SortOrder {
   Ascending = "Ascending",
   Descending = "Descending",
 }
 
-export const sortOrderAtom = atom<SortOrder>(SortOrder.Descending);
+export const sortOrderAtom = atomWithStorage<SortOrder>(
+  "sortOrder",
+  SortOrder.Descending
+);
+
+// sessionStorageを使いたい場合（コメントアウトして利用）
+/*
+const sessionStorageForJotai = createJSONStorage(() => sessionStorage);
+export const sortOrderAtom = atomWithStorage<SortOrder>(
+  "sortOrder",
+  SortOrder.Descending,
+  sessionStorageForJotai
+);
+*/

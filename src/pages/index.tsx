@@ -1,46 +1,45 @@
-//このコメントは、Pull Requestのテスト用のものです。
-//src/pages/index.tsx
 import { useAtom } from "jotai";
 import { filterAtom, Filter } from "@/atoms";
 import { sortOrderAtom, SortOrder } from "@/atoms";
 import Head from "next/head";
-import { NextPage } from "next";
+import { NextPage, GetStaticProps } from "next";
+
+type PostStatus = "Active" | "Completed";
 
 type Post = {
   id: number;
   title: string;
   date: string;
+  status: PostStatus;
 };
 
 type HomeProps = {
   allPostsData: Post[];
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   return {
     props: {
       allPostsData: [
-        { id: 1, title: "First Post", date: "2024-01-01" },
-        { id: 2, title: "Second Post", date: "2024-01-02" },
-        { id: 3, title: "Third Post", date: "2024-01-03" },
+        { id: 1, title: "First Post", date: "2024-01-01", status: "Active" },
+        { id: 2, title: "Second Post", date: "2024-01-02", status: "Completed" },
+        { id: 3, title: "Third Post", date: "2024-01-03", status: "Active" },
       ],
     },
   };
 };
 
 const Home: NextPage<HomeProps> = ({ allPostsData }) => {
-  // フィルタリングとソートの状態を管理
-  const [filter, setFilter] = useAtom(filterAtom);
+  const [filter,setFilter] =useAtom(filterAtom);
   const [sortOrder, setSortOrder] = useAtom(sortOrderAtom);
+  
+const filteredData = allPostsData.filter((post) => {
+  if (filter === Filter.All) return true;
+  if (filter === Filter.Active)return post.status === "Active";
+  if (filter === Filter.Completed)return post.status === "Completed";
+  return false;
+});
 
-  // フィルタリング処理
-  const filteredData = allPostsData.filter((post) => {
-    if (filter === Filter.All) return true;
-    if (filter === Filter.Active) return post.id % 2 !== 0; // Activeの条件
-    if (filter === Filter.Completed) return post.id % 2 === 0; // Completedの条件
-  });
-
-  // ソート処理
   const sortedPosts = [...filteredData].sort(
     (a, b) => Date.parse(a.date) - Date.parse(b.date)
   );
